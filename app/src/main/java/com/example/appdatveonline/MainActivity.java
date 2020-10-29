@@ -1,28 +1,35 @@
 package com.example.appdatveonline;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainView {
     Toolbar toolbar;
     ViewFlipper viewFlipper;
-    RecyclerView recyclerViewTrangChu;
     Animation in,out;
+
+    RecyclerView recyclerView;
+    MainPresenter presenter;
+    MainAdapter adapter;
+    MainAdapter.ItemClickListener itemClickListener;
+    List<Movies> movie;
 
 
     @Override
@@ -34,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
         out = AnimationUtils.loadAnimation(this,R.anim.fade_out);
         viewFlipper.setInAnimation(in);
         viewFlipper.setInAnimation(out);
+        recyclerView=findViewById((R.id.main_recyclerView));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        presenter= new MainPresenter( this);
+        presenter.getData();
+
+        itemClickListener=((view, position) ->{
+            String title=movie.get(position).getTitle();
+            Toast.makeText(this,title,Toast.LENGTH_SHORT).show();
+        });
+
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 
         bottomNav.setSelectedItemId(R.id.nav_home);
@@ -41,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             private Object LoginActivity;
 
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
@@ -61,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
         });
         int[] ArrayHinh = {R.drawable.abc,R.drawable.a2,R.drawable.a3,R.drawable.a4};
-        for (int i=0;i<ArrayHinh.length;i++){
+        for (int value : ArrayHinh) {
             ImageView imageView = new ImageView(this);
-            imageView.setBackgroundResource(ArrayHinh[i]);
+            imageView.setBackgroundResource(value);
             viewFlipper.addView(imageView);
         }
         viewFlipper.setFlipInterval(3000);
@@ -71,4 +89,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onGetResult(List<Movies> moviesList) {
+        adapter=new MainAdapter(moviesList,this,itemClickListener);
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
+        movie=moviesList;
+    }
+
+    @Override
+    public void onErrorLoading(String message) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
 }

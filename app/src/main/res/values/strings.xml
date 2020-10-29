@@ -15,4 +15,8 @@
     <string name="password_error">Please enter a password</string>
     <string name="error_invalid_password">Please enter a minimum password of 6 characters</string>
     <string name="film">Film</string>
+    <string name="todo">"image "</string>
+    <string name="movie_title">Title</string>
+    <string name="price">Price</string>
+    <string name="description">Description</string>
 </resources>
