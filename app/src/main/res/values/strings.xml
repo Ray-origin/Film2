@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppDatVeOnline</string>
+    <string name="Account">Account</string>
+    <string name="film">Film</string>
 </resources>
