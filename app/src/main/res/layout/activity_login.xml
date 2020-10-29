@@ -102,6 +102,6 @@
         android:layout_marginTop="-50dp"
         android:background="@drawable/round_background"
         android:padding="15dp"
-        />
+      />
 
 </RelativeLayout>

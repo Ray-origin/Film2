@@ -1,18 +1,16 @@
 package com.example.appdatveonline;
 
-import android.annotation.SuppressLint;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
-
 public class Film extends AppCompatActivity {
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,20 +20,24 @@ public class Film extends AppCompatActivity {
 
         bottomNav.setSelectedItemId(R.id.nav_film);
 
-        bottomNav.setOnNavigationItemSelectedListener(menuItem -> {
-            switch (menuItem.getItemId()){
-                case R.id.nav_film:
-                    return true;
-                case R.id.nav_home:
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class ));
-                    overridePendingTransition(0,0);
-                    return true;
-                case R.id.nav_account:
-                    startActivity(new Intent(getApplicationContext(),Account.class ));
-                    overridePendingTransition(0,0);
-                    return true;
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.nav_film:
+//                        Intent intent = new Intent();
+                        return true;
+                    case R.id.nav_home:
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class ));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.nav_account:
+                        startActivity(new Intent(getApplicationContext(),LoginActivity.class ));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
             }
-            return false;
         });
     }
 }
