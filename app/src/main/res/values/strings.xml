@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">AppDatVeOnline</string>
     <string name="Account">Account</string>
+    <string name="home">Home</string>
     <string name="film">Film</string>
+    <string name="account">Account</string>
 </resources>
