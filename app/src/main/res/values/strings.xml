@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">AppDatVeOnline</string>
+    <string name="app_name">Galaxy</string>
     <string name="Account">Account</string>
     <string name="home">Home</string>
     <string name="film">Film</string>
     <string name="account">Account</string>
+    <string name="todo">TODO</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="price">000000</string>
+    <string name="description">description</string>
 </resources>
