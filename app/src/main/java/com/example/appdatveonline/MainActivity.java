@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-        
+        getMovies();
     }
 
     public void getMovies(){

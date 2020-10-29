@@ -22,8 +22,8 @@ import static androidx.recyclerview.widget.RecyclerView.OnClickListener;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.RecyclerViewAdapter> {
     List<Movies> movies;
-    private Context context;
-    private ItemClickListener itemClickListener;
+    private final Context context;
+    private final ItemClickListener itemClickListener;
 
     public MainAdapter(List<Movies> movies, Context context, ItemClickListener itemClickListener) {
         this.movies = movies;
